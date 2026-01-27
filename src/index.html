@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
+
+    <link rel="stylesheet" href="/build/stencil-test.css">
+    <script type="module" src="/build/stencil-test.esm.js"></script>
+    <script nomodule src="/build/stencil-test.js"></script>
+    <script type="module" src="/src/ds.ts"></script>
+  </head>
+  <body>
+    <!-- <my-component first="Stencil" middle="'Don't call me a framework'" last="JS"></my-component> -->
+    <ds-input
+  label="Email"
+  placeholder="you@example.com"
+  helper-text="We won't spam you"
+></ds-input>
+
+<div style="height: 16px"></div>
+
+<ds-button id="open-modal">Open modal</ds-button>
+
+<ds-modal id="m" title="Hello" open="false">
+  This is a test modal.
+</ds-modal>
+
+<script>
+  const btn = document.getElementById("open-modal");
+  const modal = document.getElementById("m");
+
+  btn.addEventListener("click", () => modal.open = true);
+  modal.addEventListener("ds-close", () => (modal.open = false));
+</script>
+  </body>
+</html>
