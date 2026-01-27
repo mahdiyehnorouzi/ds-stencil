@@ -1,0 +1,14 @@
+{
+  "entries": [
+    "components/ds-button/index.js",
+    "components/ds-input/index.js",
+    "components/ds-modal/index.js"
+  ],
+  "compiler": {
+    "name": "@stencil/core",
+    "version": "4.41.3",
+    "typescriptVersion": "5.8.3"
+  },
+  "collections": [],
+  "bundles": []
+}
