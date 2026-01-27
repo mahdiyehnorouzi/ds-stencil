@@ -12,26 +12,26 @@
   </head>
   <body>
     <!-- <my-component first="Stencil" middle="'Don't call me a framework'" last="JS"></my-component> -->
-    <ds-input
-  label="Email"
-  placeholder="you@example.com"
-  helper-text="We won't spam you"
-></ds-input>
+    <stc-input
+      label="Email"
+      placeholder="you@example.com"
+      helper-text="We won't spam you"
+    ></stc-input>
 
-<div style="height: 16px"></div>
+    <div style="height: 16px"></div>
 
-<ds-button id="open-modal">Open modal</ds-button>
+    <stc-button id="open-modal">Open modal</stc-button>
 
-<ds-modal id="m" title="Hello" open="false">
-  This is a test modal.
-</ds-modal>
+    <stc-modal id="m" title="Hello" open="false">
+       This is a test modal.
+    </stc-modal>
 
-<script>
-  const btn = document.getElementById("open-modal");
-  const modal = document.getElementById("m");
+    <script>
+       const btn = document.getElementById("open-modal");
+       const modal = document.getElementById("m");
 
-  btn.addEventListener("click", () => modal.open = true);
-  modal.addEventListener("ds-close", () => (modal.open = false));
-</script>
+       btn.addEventListener("click", () => modal.open = true);
+       modal.addEventListener("ds-close", () => (modal.open = false));
+    </script>
   </body>
 </html>
