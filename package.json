@@ -1,36 +1,30 @@
 {
-  "name": "@ds/stencil",
+  "name": "@mahdiyehnorouzi/ds-stencil",
   "private": true,
   "type": "module",
-  "main": "www/build/index.esm.js",
-  "module": "www/build/index.esm.js",
+  "main": "dist/stencil-test/stencil-test.esm.js",
+  "module": "dist/stencil-test/stencil-test.esm.js",
+  "types": "dist/types/index.d.ts",
   "unpkg": "www/build/stencil-test.esm.js",
-  "types": "loader/index.d.ts",
   "version": "0.0.1",
   "description": "Stencil Component Starter",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
   "exports": {
-    ".": "./www/build/index.esm.js" ,
-    "./my-component": {
-      "import": "./dist/components/my-component.js",
-      "types": "./dist/components/my-component.d.ts"
+   ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/stencil-test/stencil-test.esm.js"
     },
     "./loader": {
-      "import": "./loader/index.js",
-      "require": "./loader/index.cjs",
-      "types": "./loader/index.d.ts"
+      "types": "./loader/index.d.ts",
+      "import": "./loader/index.js"
     }
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/stenciljs/component-starter.git"
   },
-  "files": [
-    "www/",
-    "dist/",
-    "loader/"
-  ],
+  "files": ["dist/", "loader/"],
   "scripts": {
     "build": "stencil build",
     "start": "stencil build --dev --watch --serve",
