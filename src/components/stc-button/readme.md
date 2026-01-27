@@ -19,13 +19,13 @@
 
 ### Used by
 
- - [ds-modal](../ds-modal)
+ - [stc-modal](../stc-modal)
 
 ### Graph
 ```mermaid
 graph TD;
-  ds-modal --> ds-button
-  style ds-button fill:#f9f,stroke:#333,stroke-width:4px
+  stc-modal --> stc-button
+  style stc-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

@@ -6,7 +6,7 @@
   "module": "dist/stencil-test/stencil-test.esm.js",
   "types": "dist/types/index.d.ts",
   "unpkg": "www/build/stencil-test.esm.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Stencil Component Starter",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",

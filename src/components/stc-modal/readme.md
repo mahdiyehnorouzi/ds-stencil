@@ -15,22 +15,22 @@
 
 ## Events
 
-| Event      | Description | Type                |
-| ---------- | ----------- | ------------------- |
-| `ds-close` |             | `CustomEvent<void>` |
+| Event       | Description | Type                |
+| ----------- | ----------- | ------------------- |
+| `stc-close` |             | `CustomEvent<void>` |
 
 
 ## Dependencies
 
 ### Depends on
 
-- [ds-button](../ds-button)
+- [stc-button](../stc-button)
 
 ### Graph
 ```mermaid
 graph TD;
-  ds-modal --> ds-button
-  style ds-modal fill:#f9f,stroke:#333,stroke-width:4px
+  stc-modal --> stc-button
+  style stc-modal fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

@@ -17,5 +17,5 @@ var patchBrowser = () => {
 
 patchBrowser().then(async (options) => {
   await globalScripts();
-  return bootstrapLazy([["ds-button_3",[[772,"ds-modal",{"open":[1540],"title":[1]},[[8,"keydown","onKeyDown"]]],[512,"ds-input",{"label":[1],"placeholder":[1],"value":[1025],"disabled":[4],"state":[1],"helperText":[1,"helper-text"]}],[772,"ds-button",{"variant":[1],"size":[1],"disabled":[516],"loading":[4]}]]]], options);
+  return bootstrapLazy([["stc-button",[[772,"stc-button",{"variant":[1],"size":[1],"disabled":[516],"loading":[4]}]]],["stc-modal",[[772,"stc-modal",{"open":[1540],"title":[1]},[[8,"keydown","onKeyDown"]]]]],["stc-input",[[512,"stc-input",{"label":[1],"placeholder":[1],"value":[1025],"disabled":[4],"state":[1],"helperText":[1,"helper-text"]}]]]], options);
 });

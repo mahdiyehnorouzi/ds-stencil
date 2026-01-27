@@ -1,36 +1,27 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Test</title>
+    <link rel="stylesheet" href="www/build/stencil-test.css">
+</head>
+<body class="p-8 bg-gray-100">
+    <h1 class="text-2xl font-bold mb-4">Tailwind Style Test</h1>
 
-    <script type="module" src="/build/stencil-test.esm.js"></script>
-    <script nomodule src="/build/stencil-test.js"></script>
-    <script type="module" src="/src/ds.ts"></script>
-  </head>
-  <body>
-    <!-- <my-component first="Stencil" middle="'Don't call me a framework'" last="JS"></my-component> -->
-    <ds-input
-  label="Email"
-  placeholder="you@example.com"
-  helper-text="We won't spam you"
-></ds-input>
+    <!-- Test basic button styles -->
+    <button class="bg-black text-white hover:bg-zinc-800 px-4 py-2 rounded-xl mr-2">Primary Button</button>
+    <button class="bg-white text-black border border-zinc-200 hover:bg-zinc-50 px-4 py-2 rounded-xl mr-2">Secondary Button</button>
+    <button class="bg-red-600 text-white hover:bg-red-500 px-4 py-2 rounded-xl">Danger Button</button>
 
-<div style="height: 16px"></div>
+    <div class="mt-8">
+        <h2 class="text-xl font-semibold mb-4">Input Test</h2>
+        <input class="h-10 w-full rounded-xl border border-zinc-200 bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-zinc-300" placeholder="Test input">
+    </div>
 
-<ds-button id="open-modal">Open modal</ds-button>
-
-<ds-modal id="m" title="Hello" open="false">
-  This is a test modal.
-</ds-modal>
-
-<script>
-  const btn = document.getElementById("open-modal");
-  const modal = document.getElementById("m");
-
-  btn.addEventListener("click", () => modal.open = true);
-  modal.addEventListener("ds-close", () => (modal.open = false));
-</script>
-  </body>
+    <div class="mt-8">
+        <h2 class="text-xl font-semibold mb-4">Loading Spinner Test</h2>
+        <div class="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white bg-black"></div>
+    </div>
+</body>
 </html>

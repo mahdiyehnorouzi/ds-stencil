@@ -19,9 +19,9 @@
 
 ## Events
 
-| Event      | Description         | Type                              |
-| ---------- | ------------------- | --------------------------------- |
-| `ds-input` | Emits on each input | `CustomEvent<{ value: string; }>` |
+| Event       | Description         | Type                              |
+| ----------- | ------------------- | --------------------------------- |
+| `stc-input` | Emits on each input | `CustomEvent<{ value: string; }>` |
 
 
 ----------------------------------------------

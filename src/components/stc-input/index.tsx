@@ -3,10 +3,10 @@ import { Component, Prop, Event, EventEmitter, h } from "@stencil/core";
 type InputState = "default" | "error" | "success";
 
 @Component({
-    tag: "ds-input",
+    tag: "stc-input",
     shadow: false,
 })
-export class DsInput {
+export class StcInput {
     @Prop() label = "";
     @Prop() placeholder = "";
     @Prop({ mutable: true }) value = "";
@@ -15,12 +15,12 @@ export class DsInput {
     @Prop() helperText = "";
 
     /** Emits on each input */
-    @Event({ eventName: "ds-input" }) dsInput!: EventEmitter<{ value: string }>;
+    @Event({ eventName: "stc-input" }) stcInput!: EventEmitter<{ value: string }>;
 
     private onInput = (e: Event) => {
         const v = (e.target as HTMLInputElement).value;
         this.value = v;
-        this.dsInput.emit({ value: v });
+        this.stcInput.emit({ value: v });
     };
 
     render() {

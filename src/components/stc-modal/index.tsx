@@ -1,14 +1,14 @@
 import { Component, Prop, Event, EventEmitter, h, Listen } from "@stencil/core";
 
 @Component({
-    tag: "ds-modal",
+    tag: "stc-modal",
     shadow: false,
 })
-export class DsModal {
+export class StcModal {
     @Prop({ reflect: true, mutable: true }) open = false;
     @Prop() title = "";
 
-    @Event({ eventName: "ds-close" }) dsClose!: EventEmitter<void>;
+    @Event({ eventName: "stc-close" }) stcClose!: EventEmitter<void>;
 
     @Listen("keydown", { target: "window" })
     onKeyDown(e: KeyboardEvent) {
@@ -17,12 +17,11 @@ export class DsModal {
 
     private close = () => {
         this.open = false;
-        this.dsClose.emit();
+        this.stcClose.emit();
     };
 
     private onBackdropClick = (e: MouseEvent) => {
-        // فقط اگر روی خود backdrop کلیک شد
-        if ((e.target as HTMLElement).classList.contains("ds-backdrop")) {
+        if ((e.target as HTMLElement).classList.contains("stc-backdrop")) {
             this.close();
         }
     };
@@ -31,9 +30,9 @@ export class DsModal {
         if (!this.open) return null;
 
         return (
-            <div class="ds-root" role="dialog" aria-modal="true">
+            <div class="stc-root" role="dialog" aria-modal="true">
                 <button
-                    class="ds-backdrop fixed inset-0 bg-black/40"
+                    class="stc-backdrop fixed inset-0 bg-black/40"
                     aria-label="Close backdrop"
                     onClick={this.onBackdropClick}
                 ></button>
@@ -54,10 +53,10 @@ export class DsModal {
                     </div>
 
                     <div class="mt-4 flex justify-end gap-2">
-                        <ds-button variant="secondary" onClick={this.close}>
+                        <stc-button variant="secondary" onClick={this.close}>
                             Cancel
-                        </ds-button>
-                        <ds-button>OK</ds-button>
+                        </stc-button>
+                        <stc-button>OK</stc-button>
                     </div>
                 </div>
             </div>

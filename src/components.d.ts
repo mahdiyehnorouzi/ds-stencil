@@ -6,7 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface DsButton {
+    interface StcButton {
         /**
           * @default false
          */
@@ -24,7 +24,7 @@ export namespace Components {
          */
         "variant": Variant;
     }
-    interface DsInput {
+    interface StcInput {
         /**
           * @default false
          */
@@ -50,7 +50,7 @@ export namespace Components {
          */
         "value": string;
     }
-    interface DsModal {
+    interface StcModal {
         /**
           * @default false
          */
@@ -61,63 +61,63 @@ export namespace Components {
         "title": string;
     }
 }
-export interface DsInputCustomEvent<T> extends CustomEvent<T> {
+export interface StcInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLDsInputElement;
+    target: HTMLStcInputElement;
 }
-export interface DsModalCustomEvent<T> extends CustomEvent<T> {
+export interface StcModalCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLDsModalElement;
+    target: HTMLStcModalElement;
 }
 declare global {
-    interface HTMLDsButtonElement extends Components.DsButton, HTMLStencilElement {
+    interface HTMLStcButtonElement extends Components.StcButton, HTMLStencilElement {
     }
-    var HTMLDsButtonElement: {
-        prototype: HTMLDsButtonElement;
-        new (): HTMLDsButtonElement;
+    var HTMLStcButtonElement: {
+        prototype: HTMLStcButtonElement;
+        new (): HTMLStcButtonElement;
     };
-    interface HTMLDsInputElementEventMap {
-        "ds-input": { value: string };
+    interface HTMLStcInputElementEventMap {
+        "stc-input": { value: string };
     }
-    interface HTMLDsInputElement extends Components.DsInput, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLDsInputElementEventMap>(type: K, listener: (this: HTMLDsInputElement, ev: DsInputCustomEvent<HTMLDsInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+    interface HTMLStcInputElement extends Components.StcInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLStcInputElementEventMap>(type: K, listener: (this: HTMLStcInputElement, ev: StcInputCustomEvent<HTMLStcInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLDsInputElementEventMap>(type: K, listener: (this: HTMLDsInputElement, ev: DsInputCustomEvent<HTMLDsInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLStcInputElementEventMap>(type: K, listener: (this: HTMLStcInputElement, ev: StcInputCustomEvent<HTMLStcInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
-    var HTMLDsInputElement: {
-        prototype: HTMLDsInputElement;
-        new (): HTMLDsInputElement;
+    var HTMLStcInputElement: {
+        prototype: HTMLStcInputElement;
+        new (): HTMLStcInputElement;
     };
-    interface HTMLDsModalElementEventMap {
-        "ds-close": void;
+    interface HTMLStcModalElementEventMap {
+        "stc-close": void;
     }
-    interface HTMLDsModalElement extends Components.DsModal, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLDsModalElementEventMap>(type: K, listener: (this: HTMLDsModalElement, ev: DsModalCustomEvent<HTMLDsModalElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+    interface HTMLStcModalElement extends Components.StcModal, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLStcModalElementEventMap>(type: K, listener: (this: HTMLStcModalElement, ev: StcModalCustomEvent<HTMLStcModalElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLDsModalElementEventMap>(type: K, listener: (this: HTMLDsModalElement, ev: DsModalCustomEvent<HTMLDsModalElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLStcModalElementEventMap>(type: K, listener: (this: HTMLStcModalElement, ev: StcModalCustomEvent<HTMLStcModalElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
-    var HTMLDsModalElement: {
-        prototype: HTMLDsModalElement;
-        new (): HTMLDsModalElement;
+    var HTMLStcModalElement: {
+        prototype: HTMLStcModalElement;
+        new (): HTMLStcModalElement;
     };
     interface HTMLElementTagNameMap {
-        "ds-button": HTMLDsButtonElement;
-        "ds-input": HTMLDsInputElement;
-        "ds-modal": HTMLDsModalElement;
+        "stc-button": HTMLStcButtonElement;
+        "stc-input": HTMLStcInputElement;
+        "stc-modal": HTMLStcModalElement;
     }
 }
 declare namespace LocalJSX {
-    interface DsButton {
+    interface StcButton {
         /**
           * @default false
          */
@@ -135,7 +135,7 @@ declare namespace LocalJSX {
          */
         "variant"?: Variant;
     }
-    interface DsInput {
+    interface StcInput {
         /**
           * @default false
          */
@@ -151,7 +151,7 @@ declare namespace LocalJSX {
         /**
           * Emits on each input
          */
-        "onDs-input"?: (event: DsInputCustomEvent<{ value: string }>) => void;
+        "onStc-input"?: (event: StcInputCustomEvent<{ value: string }>) => void;
         /**
           * @default ""
          */
@@ -165,8 +165,8 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
-    interface DsModal {
-        "onDs-close"?: (event: DsModalCustomEvent<void>) => void;
+    interface StcModal {
+        "onStc-close"?: (event: StcModalCustomEvent<void>) => void;
         /**
           * @default false
          */
@@ -177,18 +177,18 @@ declare namespace LocalJSX {
         "title"?: string;
     }
     interface IntrinsicElements {
-        "ds-button": DsButton;
-        "ds-input": DsInput;
-        "ds-modal": DsModal;
+        "stc-button": StcButton;
+        "stc-input": StcInput;
+        "stc-modal": StcModal;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "ds-button": LocalJSX.DsButton & JSXBase.HTMLAttributes<HTMLDsButtonElement>;
-            "ds-input": LocalJSX.DsInput & JSXBase.HTMLAttributes<HTMLDsInputElement>;
-            "ds-modal": LocalJSX.DsModal & JSXBase.HTMLAttributes<HTMLDsModalElement>;
+            "stc-button": LocalJSX.StcButton & JSXBase.HTMLAttributes<HTMLStcButtonElement>;
+            "stc-input": LocalJSX.StcInput & JSXBase.HTMLAttributes<HTMLStcInputElement>;
+            "stc-modal": LocalJSX.StcModal & JSXBase.HTMLAttributes<HTMLStcModalElement>;
         }
     }
 }

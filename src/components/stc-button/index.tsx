@@ -3,12 +3,8 @@ import { Component, Prop, h } from "@stencil/core";
 type Variant = "primary" | "secondary" | "danger";
 type Size = "sm" | "md" | "lg";
 
-// @Component({
-//     tag: "ds-button",
-//     shadow: false,
-// })
-@Component({ tag: "ds-button", shadow: false })
-export class DsButton {
+@Component({ tag: "stc-button", shadow: false })
+export class StcButton {
     @Prop() variant: Variant = "primary";
     @Prop() size: Size = "md";
     @Prop({ reflect: true }) disabled = false;

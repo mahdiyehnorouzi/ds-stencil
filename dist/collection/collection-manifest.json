@@ -1,8 +1,8 @@
 {
   "entries": [
-    "components/ds-button/index.js",
-    "components/ds-input/index.js",
-    "components/ds-modal/index.js"
+    "components/stc-button/index.js",
+    "components/stc-input/index.js",
+    "components/stc-modal/index.js"
   ],
   "compiler": {
     "name": "@stencil/core",
