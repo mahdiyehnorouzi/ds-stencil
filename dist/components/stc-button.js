@@ -1,0 +1,1 @@
+import{S as o,d as s}from"./p-C3mJIK8Y.js";const m=o,p=s;export{m as StcButton,p as defineCustomElement}
