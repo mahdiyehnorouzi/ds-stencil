@@ -6,7 +6,7 @@
   "module": "dist/stencil-test/stencil-test.esm.js",
   "types": "dist/types/index.d.ts",
   "unpkg": "www/build/stencil-test.esm.js",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "Stencil Component Starter",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
@@ -14,6 +14,18 @@
     ".": {
       "types": "./dist/types/index.d.ts",
       "import": "./dist/stencil-test/stencil-test.esm.js"
+    },
+    "./components/stc-button": {
+      "import": "./dist/custom-elements/stc-button.js",
+      "types": "./dist/types/components.d.ts"
+    },
+    "./components/stc-modal": {
+      "import": "./dist/custom-elements/stc-modal.js",
+      "types": "./dist/types/components.d.ts"
+    },
+    "./components/stc-input": {
+      "import": "./dist/custom-elements/stc-input.js",
+      "types": "./dist/types/components.d.ts"
     },
     "./loader": {
       "types": "./loader/index.d.ts",
