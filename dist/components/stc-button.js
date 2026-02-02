@@ -1,1 +1,1 @@
-import{S as o,d as s}from"./p-B48FoR6T.js";const p=o,r=s;export{p as StcButton,r as defineCustomElement}
+import{S as o,d as p}from"./p-BN-0NpFV.js";const s=o,r=p;export{s as StcButton,r as defineCustomElement}

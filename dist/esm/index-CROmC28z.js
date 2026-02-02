@@ -1,7 +1,5 @@
-'use strict';
-
 const NAMESPACE = 'stencil-test';
-const BUILD = /* stencil-test */ { hydratedSelectorName: "hydrated", lazyLoad: true, prop: true, propChangeCallback: false, shadowDom: false, slotRelocation: true, updatable: true};
+const BUILD = /* stencil-test */ { hotModuleReplacement: false, hydratedSelectorName: "hydrated", lazyLoad: true, prop: true, propChangeCallback: false, shadowDom: false, slotRelocation: true, updatable: true};
 
 /*
  Stencil Client Platform v4.41.3 | MIT Licensed | https://stenciljs.com
@@ -109,6 +107,9 @@ var loadModule = (cmpMeta, hostRef, hmrVersionId) => {
     }
   );
 };
+
+// src/client/client-style.ts
+var styles = /* @__PURE__ */ new Map();
 var HYDRATED_CSS = "{visibility:hidden}.hydrated{visibility:inherit}";
 var SLOT_FB_CSS = "slot-fb{display:contents}slot-fb[hidden]{display:none}";
 var win = typeof window !== "undefined" ? window : {};
@@ -140,6 +141,18 @@ var supportsListenerOptions = /* @__PURE__ */ (() => {
   return supportsListenerOptions2;
 })();
 var promiseResolve = (v) => Promise.resolve(v);
+var supportsConstructableStylesheets = /* @__PURE__ */ (() => {
+  try {
+    if (!win.document.adoptedStyleSheets) {
+      return false;
+    }
+    new CSSStyleSheet();
+    return typeof new CSSStyleSheet().replaceSync === "function";
+  } catch (e) {
+  }
+  return false;
+})() ;
+var supportsMutableAdoptedStyleSheets = supportsConstructableStylesheets ? /* @__PURE__ */ (() => !!win.document && Object.getOwnPropertyDescriptor(win.document.adoptedStyleSheets, "length").writable)() : false;
 var queuePending = false;
 var queueDomReads = [];
 var queueDomWrites = [];
@@ -317,6 +330,128 @@ function queryNonceMetaTagContent(doc) {
 
 // src/runtime/styles.ts
 var rootAppliedStyles = /* @__PURE__ */ new WeakMap();
+var registerStyle = (scopeId2, cssText, allowCS) => {
+  let style = styles.get(scopeId2);
+  if (supportsConstructableStylesheets && allowCS) {
+    style = style || new CSSStyleSheet();
+    if (typeof style === "string") {
+      style = cssText;
+    } else {
+      style.replaceSync(cssText);
+    }
+  } else {
+    style = cssText;
+  }
+  styles.set(scopeId2, style);
+};
+var addStyle = (styleContainerNode, cmpMeta, mode) => {
+  var _a, _b, _c;
+  const scopeId2 = getScopeId(cmpMeta);
+  const style = styles.get(scopeId2);
+  if (!win.document) {
+    return scopeId2;
+  }
+  styleContainerNode = styleContainerNode.nodeType === 11 /* DocumentFragment */ ? styleContainerNode : win.document;
+  if (style) {
+    if (typeof style === "string") {
+      styleContainerNode = styleContainerNode.head || styleContainerNode;
+      let appliedStyles = rootAppliedStyles.get(styleContainerNode);
+      let styleElm;
+      if (!appliedStyles) {
+        rootAppliedStyles.set(styleContainerNode, appliedStyles = /* @__PURE__ */ new Set());
+      }
+      if (!appliedStyles.has(scopeId2)) {
+        styleElm = win.document.createElement("style");
+        styleElm.textContent = style;
+        const nonce = (_a = plt.$nonce$) != null ? _a : queryNonceMetaTagContent(win.document);
+        if (nonce != null) {
+          styleElm.setAttribute("nonce", nonce);
+        }
+        if (!(cmpMeta.$flags$ & 1 /* shadowDomEncapsulation */)) {
+          if (styleContainerNode.nodeName === "HEAD") {
+            const preconnectLinks = styleContainerNode.querySelectorAll("link[rel=preconnect]");
+            const referenceNode2 = preconnectLinks.length > 0 ? preconnectLinks[preconnectLinks.length - 1].nextSibling : styleContainerNode.querySelector("style");
+            styleContainerNode.insertBefore(
+              styleElm,
+              (referenceNode2 == null ? void 0 : referenceNode2.parentNode) === styleContainerNode ? referenceNode2 : null
+            );
+          } else if ("host" in styleContainerNode) {
+            if (supportsConstructableStylesheets) {
+              const currentWindow = (_b = styleContainerNode.defaultView) != null ? _b : styleContainerNode.ownerDocument.defaultView;
+              const stylesheet = new currentWindow.CSSStyleSheet();
+              stylesheet.replaceSync(style);
+              if (supportsMutableAdoptedStyleSheets) {
+                styleContainerNode.adoptedStyleSheets.unshift(stylesheet);
+              } else {
+                styleContainerNode.adoptedStyleSheets = [stylesheet, ...styleContainerNode.adoptedStyleSheets];
+              }
+            } else {
+              const existingStyleContainer = styleContainerNode.querySelector("style");
+              if (existingStyleContainer) {
+                existingStyleContainer.textContent = style + existingStyleContainer.textContent;
+              } else {
+                styleContainerNode.prepend(styleElm);
+              }
+            }
+          } else {
+            styleContainerNode.append(styleElm);
+          }
+        }
+        if (cmpMeta.$flags$ & 1 /* shadowDomEncapsulation */) {
+          styleContainerNode.insertBefore(styleElm, null);
+        }
+        if (cmpMeta.$flags$ & 4 /* hasSlotRelocation */) {
+          styleElm.textContent += SLOT_FB_CSS;
+        }
+        if (appliedStyles) {
+          appliedStyles.add(scopeId2);
+        }
+      }
+    } else {
+      let appliedStyles = rootAppliedStyles.get(styleContainerNode);
+      if (!appliedStyles) {
+        rootAppliedStyles.set(styleContainerNode, appliedStyles = /* @__PURE__ */ new Set());
+      }
+      if (!appliedStyles.has(scopeId2)) {
+        const currentWindow = (_c = styleContainerNode.defaultView) != null ? _c : styleContainerNode.ownerDocument.defaultView;
+        let stylesheet;
+        if (style.constructor === currentWindow.CSSStyleSheet) {
+          stylesheet = style;
+        } else {
+          stylesheet = new currentWindow.CSSStyleSheet();
+          for (let i2 = 0; i2 < style.cssRules.length; i2++) {
+            stylesheet.insertRule(style.cssRules[i2].cssText, i2);
+          }
+        }
+        if (supportsMutableAdoptedStyleSheets) {
+          styleContainerNode.adoptedStyleSheets.push(stylesheet);
+        } else {
+          styleContainerNode.adoptedStyleSheets = [...styleContainerNode.adoptedStyleSheets, stylesheet];
+        }
+        appliedStyles.add(scopeId2);
+      }
+    }
+  }
+  return scopeId2;
+};
+var attachStyles = (hostRef) => {
+  const cmpMeta = hostRef.$cmpMeta$;
+  const elm = hostRef.$hostElement$;
+  const flags = cmpMeta.$flags$;
+  const endAttachStyles = createTime("attachStyles", cmpMeta.$tagName$);
+  const scopeId2 = addStyle(
+    elm.getRootNode(),
+    cmpMeta);
+  if (flags & 10 /* needsScopedEncapsulation */) {
+    elm["s-sc"] = scopeId2;
+    elm.classList.add(scopeId2 + "-h");
+  }
+  endAttachStyles();
+};
+var getScopeId = (cmp, mode) => "sc-" + (cmp.$tagName$);
+
+// src/utils/helpers.ts
+var isDef = (v) => v != null && v !== void 0;
 var isComplexType = (o) => {
   o = typeof o;
   return o === "object" || o === "function";
@@ -558,6 +693,9 @@ function sortedAttrNames(attrNames) {
     attrNames
   );
 }
+
+// src/runtime/vdom/vdom-render.ts
+var scopeId;
 var contentRef;
 var hostTagName;
 var useNativeShadowDom = false;
@@ -603,6 +741,9 @@ var createElm = (oldParentVNode, newParentVNode, childIndex) => {
     {
       updateElement(null, newVNode2, isSvgMode);
     }
+    if (isDef(scopeId) && elm["s-si"] !== scopeId) {
+      elm.classList.add(elm["s-si"] = scopeId);
+    }
     if (newVNode2.$children$) {
       const appendTarget = newVNode2.$tag$ === "template" ? elm.content : elm;
       for (i2 = 0; i2 < newVNode2.$children$.length; ++i2) {
@@ -624,6 +765,9 @@ var createElm = (oldParentVNode, newParentVNode, childIndex) => {
       oldVNode = oldParentVNode && oldParentVNode.$children$ && oldParentVNode.$children$[childIndex];
       if (oldVNode && oldVNode.$tag$ === newVNode2.$tag$ && oldParentVNode.$elm$) {
         relocateToHostRoot(oldParentVNode.$elm$);
+      }
+      {
+        addRemoveSlotScopedClass(contentRef, elm, newParentVNode.$elm$, oldParentVNode == null ? void 0 : oldParentVNode.$elm$);
       }
     }
   }
@@ -909,7 +1053,9 @@ var markSlotContentForRelocation = (elm) => {
 };
 var insertBefore = (parent, newNode, reference, isInitialLoad) => {
   {
-    if (typeof newNode["s-sn"] === "string") {
+    if (typeof newNode["s-sn"] === "string" && !!newNode["s-sr"] && !!newNode["s-cr"]) {
+      addRemoveSlotScopedClass(newNode["s-cr"], newNode, parent, newNode.parentElement);
+    } else if (typeof newNode["s-sn"] === "string") {
       parent.insertBefore(newNode, reference);
       const { slotNode } = findSlotFromSlottedNode(newNode);
       if (slotNode && !isInitialLoad) dispatchSlotChangeEvent(slotNode);
@@ -922,6 +1068,27 @@ var insertBefore = (parent, newNode, reference, isInitialLoad) => {
     return parent == null ? void 0 : parent.insertBefore(newNode, reference);
   }
 };
+function addRemoveSlotScopedClass(reference, slotNode, newParent, oldParent) {
+  var _a, _b;
+  let scopeId2;
+  if (reference && typeof slotNode["s-sn"] === "string" && !!slotNode["s-sr"] && reference.parentNode && reference.parentNode["s-sc"] && (scopeId2 = slotNode["s-si"] || reference.parentNode["s-sc"])) {
+    const scopeName = slotNode["s-sn"];
+    const hostName = slotNode["s-hn"];
+    (_a = newParent.classList) == null ? void 0 : _a.add(scopeId2 + "-s");
+    if (oldParent && ((_b = oldParent.classList) == null ? void 0 : _b.contains(scopeId2 + "-s"))) {
+      let child = (oldParent.__childNodes || oldParent.childNodes)[0];
+      let found = false;
+      while (child) {
+        if (child["s-sn"] !== scopeName && child["s-hn"] === hostName && !!child["s-sr"]) {
+          found = true;
+          break;
+        }
+        child = child.nextSibling;
+      }
+      if (!found) oldParent.classList.remove(scopeId2 + "-s");
+    }
+  }
+}
 var renderVdom = (hostRef, renderFnResults, isInitialLoad = false) => {
   var _a, _b, _c, _d, _e;
   const hostElm = hostRef.$hostElement$;
@@ -949,6 +1116,9 @@ var renderVdom = (hostRef, renderFnResults, isInitialLoad = false) => {
   rootVnode.$flags$ |= 4 /* isHost */;
   hostRef.$vnode$ = rootVnode;
   rootVnode.$elm$ = oldVNode.$elm$ = hostElm;
+  {
+    scopeId = hostElm["s-sc"];
+  }
   useNativeShadowDom = supportsShadow;
   {
     contentRef = hostElm["s-cr"];
@@ -1128,6 +1298,9 @@ var updateComponent = async (hostRef, instance, isInitialLoad) => {
   const elm = hostRef.$hostElement$;
   const endUpdate = createTime("update", hostRef.$cmpMeta$.$tagName$);
   const rc = elm["s-rc"];
+  if (isInitialLoad) {
+    attachStyles(hostRef);
+  }
   const endRender = createTime("render", hostRef.$cmpMeta$.$tagName$);
   {
     callRender(hostRef, instance, elm, isInitialLoad);
@@ -1442,6 +1615,18 @@ var initializeComponent = async (elm, hostRef, cmpMeta, hmrVersionId) => {
       const cmpTag = elm.localName;
       customElements.whenDefined(cmpTag).then(() => hostRef.$flags$ |= 128 /* isWatchReady */);
     }
+    if (Cstr && Cstr.style) {
+      let style;
+      if (typeof Cstr.style === "string") {
+        style = Cstr.style;
+      }
+      const scopeId2 = getScopeId(cmpMeta);
+      if (!styles.has(scopeId2) || BUILD.hotModuleReplacement) {
+        const endRegisterStyles = createTime("registerStyles", cmpMeta.$tagName$);
+        registerStyle(scopeId2, style, !!(cmpMeta.$flags$ & 1 /* shadowDomEncapsulation */));
+        endRegisterStyles();
+      }
+    }
   }
   const ancestorComponent = hostRef.$ancestorComponent$;
   const schedule = () => scheduleUpdate(hostRef, true);
@@ -1714,9 +1899,4 @@ function transformTag(tag) {
   return tag;
 }
 
-exports.bootstrapLazy = bootstrapLazy;
-exports.createEvent = createEvent;
-exports.h = h;
-exports.promiseResolve = promiseResolve;
-exports.registerInstance = registerInstance;
-exports.setNonce = setNonce;
+export { bootstrapLazy as b, createEvent as c, h, promiseResolve as p, registerInstance as r, setNonce as s };

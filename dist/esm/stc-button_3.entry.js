@@ -1,4 +1,6 @@
-import { r as registerInstance, h, c as createEvent } from './index-DbqPiZ34.js';
+import { r as registerInstance, h, c as createEvent } from './index-CROmC28z.js';
+
+const stcButtonCss = () => `.sc-stc-button-h{display:inline-block}.sc-stc-button-h button.stc-button.sc-stc-button{display:inline-flex;align-items:center;justify-content:center;border-radius:0.75rem;font-weight:500;-webkit-user-select:none;-moz-user-select:none;user-select:none;transition:background-color 150ms ease, color 150ms ease,       border-color 150ms ease, box-shadow 150ms ease;outline:none}.sc-stc-button-h button.stc-button--sm.sc-stc-button{height:2rem;padding:0 0.75rem;font-size:0.875rem}.sc-stc-button-h button.stc-button--md.sc-stc-button{height:2.5rem;padding:0 1rem;font-size:0.875rem}.sc-stc-button-h button.stc-button--lg.sc-stc-button{height:3rem;padding:0 1.25rem;font-size:1rem}.sc-stc-button-h button.stc-button--primary.sc-stc-button{background:var(--stc-fg);color:var(--stc-primary-contrast);border:1px solid transparent}.sc-stc-button-h button.stc-button--primary.sc-stc-button:hover:not(:disabled){background:color-mix(in srgb, var(--stc-fg) 85%, var(--stc-surface))}.sc-stc-button-h button.stc-button--secondary.sc-stc-button{background:var(--stc-surface);color:var(--stc-fg);border:1px solid var(--stc-border)}.sc-stc-button-h button.stc-button--danger.sc-stc-button{background:var(--stc-danger, #dc2626);color:var(--stc-danger-contrast, #fff)}`;
 
 const StcButton = class {
     constructor(hostRef) {
@@ -9,20 +11,16 @@ const StcButton = class {
     disabled = false;
     loading = false;
     render() {
-        const base = "inline-flex items-center justify-center rounded-xl font-medium transition select-none focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed";
-        const sizeCls = {
-            sm: "h-8 px-3 text-sm",
-            md: "h-10 px-4 text-sm",
-            lg: "h-12 px-5 text-base",
-        };
-        const variantCls = {
-            primary: "bg-black text-white hover:bg-zinc-800 focus:ring-zinc-400",
-            secondary: "bg-white text-black border border-zinc-200 hover:bg-zinc-50 focus:ring-zinc-300",
-            danger: "bg-red-600 text-white hover:bg-red-500 focus:ring-red-300",
-        };
-        return (h("button", { key: 'b8cc4fabfecd35b2787ff2bfa28b37fef41b2844', class: `${base} ${sizeCls[this.size]} ${variantCls[this.variant]}`, disabled: this.disabled || this.loading }, this.loading ? (h("span", { class: "mr-2 inline-block h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" })) : null, h("slot", { key: '2ce92ecb56c8a9bddef4233a0acb943264919c98' })));
+        return (h("button", { key: 'd32dba487509c916b1f346e9976c711d903121a7', class: [
+                "stc-button",
+                `stc-button--${this.size}`,
+                `stc-button--${this.variant}`,
+            ].join(" "), disabled: this.disabled || this.loading }, this.loading ? h("span", { class: "stc-button__spinner" }) : null, h("slot", { key: '1724d02961769da71187d41af1fba3ced3ceff36' })));
     }
 };
+StcButton.style = stcButtonCss();
+
+const stcInputCss = () => `.sc-stc-input-h{display:block}.sc-stc-input-h label.sc-stc-input{display:block}.stc-input__label.sc-stc-input{margin-bottom:0.25rem;display:block;font-size:0.875rem;font-weight:500;color:var(--stc-fg)}.stc-input.sc-stc-input{width:100%;height:2.5rem;padding:0 0.75rem;font-size:0.875rem;border-radius:0.75rem;border:1px solid var(--stc-border);background:var(--stc-surface);color:var(--stc-fg);outline:none;transition:border-color 150ms ease,       box-shadow 150ms ease,       background-color 150ms ease}.stc-input.sc-stc-input::-moz-placeholder{color:var(--stc-muted)}.stc-input.sc-stc-input::placeholder{color:var(--stc-muted)}.stc-input.sc-stc-input:disabled{cursor:not-allowed;opacity:0.6;background:color-mix(in srgb, var(--stc-surface) 92%, var(--stc-fg))}.stc-input.sc-stc-input:focus{border-color:var(--stc-border);box-shadow:0 0 0 2px var(--stc-surface),       0 0 0 4px color-mix(in srgb, var(--stc-primary) 30%, transparent)}.stc-input--default.sc-stc-input{border-color:var(--stc-border)}.stc-input--error.sc-stc-input{border-color:#ef4444}.stc-input--error.sc-stc-input:focus{box-shadow:0 0 0 2px var(--stc-surface),       0 0 0 4px color-mix(in srgb, #ef4444 35%, transparent)}.stc-input--success.sc-stc-input{border-color:#22c55e}.stc-input--success.sc-stc-input:focus{box-shadow:0 0 0 2px var(--stc-surface),       0 0 0 4px color-mix(in srgb, #22c55e 35%, transparent)}`;
 
 const StcInput = class {
     constructor(hostRef) {
@@ -43,19 +41,18 @@ const StcInput = class {
         this.stcInput.emit({ value: v });
     };
     render() {
-        const ring = this.state === "error"
-            ? "focus:ring-red-300 border-red-300"
-            : this.state === "success"
-                ? "focus:ring-emerald-300 border-emerald-300"
-                : "focus:ring-zinc-300 border-zinc-200";
-        const helperColor = this.state === "error"
-            ? "text-red-600"
-            : this.state === "success"
-                ? "text-emerald-600"
-                : "text-zinc-500";
-        return (h("label", { key: '1f4967985532e0fa377f9e1e34a2bccd688f5893', class: "block" }, this.label ? (h("span", { class: "mb-1 block text-sm font-medium text-zinc-800" }, this.label)) : null, h("input", { key: 'b885576108f747a6827ebb4577eb777d8fa40155', class: `h-10 w-full rounded-xl border bg-white px-3 text-sm outline-none transition disabled:cursor-not-allowed disabled:bg-zinc-50 ${ring}`, value: this.value, disabled: this.disabled, placeholder: this.placeholder, onInput: this.onInput }), this.helperText ? (h("span", { class: `mt-1 block text-xs ${helperColor}` }, this.helperText)) : null));
+        return (h("label", { key: 'f20aa660ccf0e4327748fef86fdc24ec57838570' }, this.label ? (h("span", { class: "stc-input__label" }, this.label)) : null, h("input", { key: '16ef374038d96c5fa723942646f3993d3729db48', class: [
+                "stc-input",
+                `stc-input--${this.state}`,
+            ].join(" "), value: this.value, disabled: this.disabled, placeholder: this.placeholder, onInput: this.onInput }), this.helperText ? (h("span", { class: [
+                "stc-input__helper",
+                this.state !== "default"
+                    ? `stc-input__helper--${this.state}`
+                    : "",
+            ].join(" ") }, this.helperText)) : null));
     }
 };
+StcInput.style = stcInputCss();
 
 const StcModal = class {
     constructor(hostRef) {
