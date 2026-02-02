@@ -1,0 +1,84 @@
+:host {
+    display: block;
+  }
+  
+  :host label {
+    display: block;
+  }
+  
+  .stc-input__label {
+    margin-bottom: 0.25rem;
+    display: block;
+  
+    font-size: 0.875rem;
+    font-weight: 500;
+  
+    color: var(--stc-fg);
+  }
+  
+  .stc-input {
+    width: 100%;
+    height: 2.5rem; 
+  
+    padding: 0 0.75rem; 
+    font-size: 0.875rem;
+  
+    border-radius: 0.75rem;
+    border: 1px solid var(--stc-border);
+  
+    background: var(--stc-surface);
+    color: var(--stc-fg);
+  
+    outline: none;
+    transition:
+      border-color 150ms ease,
+      box-shadow 150ms ease,
+      background-color 150ms ease;
+  }
+  
+  .stc-input::-moz-placeholder {
+    color: var(--stc-muted);
+  }
+  
+  .stc-input::placeholder {
+    color: var(--stc-muted);
+  }
+  
+  .stc-input:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    background: color-mix(in srgb, var(--stc-surface) 92%, var(--stc-fg));
+  }
+  
+  .stc-input:focus {
+    border-color: var(--stc-border);
+    box-shadow:
+      0 0 0 2px var(--stc-surface),
+      0 0 0 4px color-mix(in srgb, var(--stc-primary) 30%, transparent);
+  }
+  
+  .stc-input--default {
+    border-color: var(--stc-border);
+  }
+  
+  .stc-input--error {
+    border-color: #ef4444;
+  }
+  
+  .stc-input--error:focus {
+    box-shadow:
+      0 0 0 2px var(--stc-surface),
+      0 0 0 4px color-mix(in srgb, #ef4444 35%, transparent);
+  }
+  
+  .stc-input--success {
+    border-color: #22c55e;
+  }
+  
+  .stc-input--success:focus {
+    box-shadow:
+      0 0 0 2px var(--stc-surface),
+      0 0 0 4px color-mix(in srgb, #22c55e 35%, transparent);
+  }
+  
+  
