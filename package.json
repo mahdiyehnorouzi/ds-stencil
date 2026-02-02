@@ -2,34 +2,35 @@
   "name": "@mahdiyehnorouzi/ds-stencil",
   "private": true,
   "type": "module",
-  "main": "dist/stencil-test/stencil-test.esm.js",
-  "module": "dist/stencil-test/stencil-test.esm.js",
-  "types": "dist/types/index.d.ts",
+  "main": "./dist/cjs/index.cjs.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/components.d.ts",
   "unpkg": "www/build/stencil-test.esm.js",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Stencil Component Starter",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
-      "import": "./dist/stencil-test/stencil-test.esm.js"
-    },
-    "./components/stc-button": {
-      "import": "./dist/components/stc-button.js",
-      "types": "./dist/types/components.d.ts"
-    },
-    "./components/stc-modal": {
-      "import": "./dist/components/stc-modal.js",
-      "types": "./dist/types/components.d.ts"
-    },
-    "./components/stc-input": {
-      "import": "./dist/components/stc-input.js",
-      "types": "./dist/types/components.d.ts"
+      "types": "./dist/types/components.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs.js"
     },
     "./loader": {
       "types": "./loader/index.d.ts",
       "import": "./loader/index.js"
+    },
+    "./components/stc-button": {
+      "types": "./dist/types/components.d.ts",
+      "import": "./dist/components/stc-button.js"
+    },
+    "./components/stc-modal": {
+      "types": "./dist/types/components.d.ts",
+      "import": "./dist/components/stc-modal.js"
+    },
+    "./components/stc-input": {
+      "types": "./dist/types/components.d.ts",
+      "import": "./dist/components/stc-input.js"
     }
   },
   "repository": {
