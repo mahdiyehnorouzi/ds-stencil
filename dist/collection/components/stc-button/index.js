@@ -5,20 +5,24 @@ export class StcButton {
     disabled = false;
     loading = false;
     render() {
-        const base = "inline-flex items-center justify-center rounded-xl font-medium transition select-none focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed";
-        const sizeCls = {
-            sm: "h-8 px-3 text-sm",
-            md: "h-10 px-4 text-sm",
-            lg: "h-12 px-5 text-base",
-        };
-        const variantCls = {
-            primary: "bg-black text-white hover:bg-zinc-800 focus:ring-zinc-400",
-            secondary: "bg-white text-black border border-zinc-200 hover:bg-zinc-50 focus:ring-zinc-300",
-            danger: "bg-red-600 text-white hover:bg-red-500 focus:ring-red-300",
-        };
-        return (h("button", { key: 'b8cc4fabfecd35b2787ff2bfa28b37fef41b2844', class: `${base} ${sizeCls[this.size]} ${variantCls[this.variant]}`, disabled: this.disabled || this.loading }, this.loading ? (h("span", { class: "mr-2 inline-block h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" })) : null, h("slot", { key: '2ce92ecb56c8a9bddef4233a0acb943264919c98' })));
+        return (h("button", { key: 'd32dba487509c916b1f346e9976c711d903121a7', class: [
+                "stc-button",
+                `stc-button--${this.size}`,
+                `stc-button--${this.variant}`,
+            ].join(" "), disabled: this.disabled || this.loading }, this.loading ? h("span", { class: "stc-button__spinner" }) : null, h("slot", { key: '1724d02961769da71187d41af1fba3ced3ceff36' })));
     }
     static get is() { return "stc-button"; }
+    static get encapsulation() { return "scoped"; }
+    static get originalStyleUrls() {
+        return {
+            "$": ["stc-button.css"]
+        };
+    }
+    static get styleUrls() {
+        return {
+            "$": ["stc-button.css"]
+        };
+    }
     static get properties() {
         return {
             "variant": {

@@ -14,19 +14,28 @@ export class StcInput {
         this.stcInput.emit({ value: v });
     };
     render() {
-        const ring = this.state === "error"
-            ? "focus:ring-red-300 border-red-300"
-            : this.state === "success"
-                ? "focus:ring-emerald-300 border-emerald-300"
-                : "focus:ring-zinc-300 border-zinc-200";
-        const helperColor = this.state === "error"
-            ? "text-red-600"
-            : this.state === "success"
-                ? "text-emerald-600"
-                : "text-zinc-500";
-        return (h("label", { key: '1f4967985532e0fa377f9e1e34a2bccd688f5893', class: "block" }, this.label ? (h("span", { class: "mb-1 block text-sm font-medium text-zinc-800" }, this.label)) : null, h("input", { key: 'b885576108f747a6827ebb4577eb777d8fa40155', class: `h-10 w-full rounded-xl border bg-white px-3 text-sm outline-none transition disabled:cursor-not-allowed disabled:bg-zinc-50 ${ring}`, value: this.value, disabled: this.disabled, placeholder: this.placeholder, onInput: this.onInput }), this.helperText ? (h("span", { class: `mt-1 block text-xs ${helperColor}` }, this.helperText)) : null));
+        return (h("label", { key: 'f20aa660ccf0e4327748fef86fdc24ec57838570' }, this.label ? (h("span", { class: "stc-input__label" }, this.label)) : null, h("input", { key: '16ef374038d96c5fa723942646f3993d3729db48', class: [
+                "stc-input",
+                `stc-input--${this.state}`,
+            ].join(" "), value: this.value, disabled: this.disabled, placeholder: this.placeholder, onInput: this.onInput }), this.helperText ? (h("span", { class: [
+                "stc-input__helper",
+                this.state !== "default"
+                    ? `stc-input__helper--${this.state}`
+                    : "",
+            ].join(" ") }, this.helperText)) : null));
     }
     static get is() { return "stc-input"; }
+    static get encapsulation() { return "scoped"; }
+    static get originalStyleUrls() {
+        return {
+            "$": ["stc-input.css"]
+        };
+    }
+    static get styleUrls() {
+        return {
+            "$": ["stc-input.css"]
+        };
+    }
     static get properties() {
         return {
             "label": {
